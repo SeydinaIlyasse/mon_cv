@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CV interactif d'un Entrepreneur & Informaticien spécialisé en systèmes d'information">
+  <title>CV Interactif - Entrepreneur & Informaticien</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Police et couleurs */
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #342626;
+    background: linear-gradient(90deg, #98afcb, #8398d8);
+    line-height: 1.6;
+    
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
+  .section-title {
+    text-align: justify;
+    margin: 20px 0;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .project-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .project-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .project-card h3 {
+    margin-bottom: 10px;
+    color: #0066cc;
+  }
+
+  .project-card p {
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  .voir-plus-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .voir-plus-btn:hover {
+    background-color: #004999;
+    transform: scale(1.05);
+  }
+
+  .voir-plus-btn:active {
+    background-color: #003366;
+    transform: scale(1);
+  }
+
+  .navbar ul {
+    display: flex;
+    list-style: none;
+  }
+
+  .navbar li {
+    margin: 0 1rem;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  .navbar a:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+  }
+
+  .hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('top.jpeg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 2s;
+  }
+
+  .hero-content button {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+  }
+
+  .hero-content button:hover {
+    background: #e6b800;
+  }
+
+  section {
+    padding: 4rem 2rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    animation: fadeInDown 1s ease-in-out;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 4px;
+    background-color: #ff7e5f;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: slideIn 1s ease-in-out;
+  }
+
+  .profile-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .profile-upload img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .skills-grid, .project-grid, .languages-grid, .education-grid, .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .skill-card, .project-card, .language-card, .education-card, .experience-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .skill-card:hover, .project-card:hover, .language-card:hover, .education-card:hover, .experience-card:hover {
+    transform: scale(1.05);
+    background-color: #d3d3d3; /* Couleur grise au survol */
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-form input, .contact-form textarea, .contact-form button {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .contact-form button {
+    background: #333;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .contact-form button:hover {
+    background: #444;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .social-links a {
+    color: #333;
+    font-size: 1.5rem;
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  .social-links a:hover {
+    color: #ff7e5f;
+    transform: scale(1.2);
+  }
+
+  footer {
+          background-color: #34495e;
+          color: white;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+          flex-wrap: wrap;
+      }
+
+      footer .footer-section {
+          margin: 10px;
+          max-width: 300px;
+      }
+
+      footer .footer-section h4 {
+          color: #f39c12;
+          margin-bottom: 10px;
+          font-size: 1.2em;
+      }
+
+      footer .footer-section p, footer .footer-section a {
+          color: #bdc3c7;
+          font-size: 0.9em;
+          text-decoration: none;
+      }
+
+      footer .footer-section a:hover {
+          text-decoration: underline;
+      }
+
+      footer .social-icons {
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+      }
+
+      footer .social-icons a {
+          color: white;
+          margin: 0 10px;
+          font-size: 1.5em;
+          transition: color 0.3s ease;
+      }
+
+      footer .social-icons a:hover {
+          color: #f39c12;
+      }
+
+      footer p {
+          margin: 0;
+          font-size: 1em;
+      }
+
+      @media (max-width: 768px) {
+          .card {
+              flex: 0 0 90%;
+              max-width: 90%;
+          }
+
+          footer {
+              flex-direction: column;
+          }
+
+    /* Responsivité */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+    }
+      .navbar ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  
+
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      width: 0;
+      left: 50%;
+    }
+    100% {
+      width: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .about-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    text-align: justify;
+  }
+
+  .about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .profile-upload {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #007bff;
+  }
+
+  .about-text {
+    flex: 2;
+    padding: 20px;
+  }
+
+  .about-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    text-align: justify; /* Ajout de cette ligne pour justifier le texte */
+  }
+
+  .btn-contact {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-contact:hover {
+    background-color: #0056b3;
+  }
+
+footer {
+          background-color: #34495e;
+          color: white;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+          flex-wrap: wrap;
+      }
+
+      footer .footer-section {
+          margin: 10px;
+          max-width: 300px;
+      }
+
+      footer .footer-section h4 {
+          color: #f39c12;
+          margin-bottom: 10px;
+          font-size: 1.2em;
+      }
+
+      footer .footer-section p, footer .footer-section a {
+          color: #bdc3c7;
+          font-size: 0.9em;
+          text-decoration: none;
+      }
+
+      footer .footer-section a:hover {
+          text-decoration: underline;
+      }
+
+      footer .social-icons {
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+      }
+
+      footer .social-icons a {
+          color: white;
+          margin: 0 10px;
+          font-size: 1.5em;
+          transition: color 0.3s ease;
+      }
+
+      footer .social-icons a:hover {
+          color: #f39c12;
+      }
+
+      footer p {
+          margin: 0;
+          font-size: 1em;
+      }
+
+      @media (max-width: 768px) {
+          .card {
+              flex: 0 0 90%;
+              max-width: 90%;
+          }
+
+          footer {
+              flex-direction: column;
+          }
+        }
+        .portfolio-slider {
+          display: flex;
+          overflow: hidden;
+          position: relative;
+          max-width: 40%; /* Réduire la taille du portfolio de moitié */
+          margin: 0 auto;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slide {
+          min-width: 100%;
+          text-align: center;
+          transition: transform 0.5s ease-in-out;
+          opacity: 0; /* Initial opacity for fade-in effect */
+          animation: fadeIn 1s forwards; /* Fade-in animation */
+        }
+        .slide img {
+          max-width: 80%; /* Réduire la taille des images */
+          height: auto;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slide-description {
+          margin-top: 10px;
+          font-size: 1.2em;
+          color: #333;
+        }
+        .slider-controls {
+          text-align: center;
+          margin-top: 20px;
+        }
+        .slider-controls button {
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          font-size: 1.2em;
+          cursor: pointer;
+          border-radius: 5px;
+          margin: 0 10px;
+          transition: background-color 0.3s;
+        }
+        .slider-controls button:hover {
+          background-color: #0056b3;
+        }
+    
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9); /* Slight zoom-in effect */
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .gallery {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          justify-content: center;
+        }
+        .gallery img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery img:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .experience-card {
+          transition: background-color 0.3s;
+        }
+        .experience-card:hover {
+          background-color: #d3d3d3; /* Couleur grise au survol */
+        }
+        .certification-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+        
+        .certification-card {
+          background-color: #f9f9f9;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          padding: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s;
+          width: calc(33.333% - 20px);
+        }
+        
+        .certification-card:hover {
+          transform: translateY(-10px);
+        }
+        
+        .certification-card h3 {
+          margin-top: 0;
+          color: #333;
+        }
+        
+        .certification-card p {
+          color: #666;
+        }
+                  .formation-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+        
+        .formation-card {
+          background-color: #ffffff;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          padding: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s;
+          width: calc(33.333% - 20px);
+        }
+        
+        .formation-card:hover {
+          transform: translateY(-10px);
+        }
+        
+        .formation-card h3 {
+          margin-top: 0;
+          color: #333;
+        }
+        
+        .formation-card p {
+          color: #666;
+        }
+        #photo-gallery {
+padding: 40px 0;
+background-color: #f9f9f9;
+text-align: center;
+}
+
+.carousel {
+overflow: hidden;
+position: relative;
+width: 100%;
+max-width: 800px;
+margin: 0 auto;
+}
+
+.carousel-track {
+display: flex;
+transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+min-width: 100%;
+box-sizing: border-box;
+}
+
+.carousel-item img {
+width: 100%;
+height: auto;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+    #profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* Rend l'image circulaire */
+        border: 2px solid #3498db; /* Ajoute une bordure bleue */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Effet d'ombre légère */
+    }
+    
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* La flèche sera affichée uniquement après avoir défilé vers le bas */
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .back-to-top:hover {
+    background-color: #0056b3;
+  }
+
+
+   
+  </style>
+ 
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="logo">Curriculum Vitae</div>
+    <nav>
+      <ul>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#languages">Langues</a></li>
+        <li><a href="#education">Éducation</a></li>
+        <li><a href="#experience">Expérience</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Section Accueil -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bonjour, je suis Seydina Ilyasse SIDIBE</h1>
+      <p>Entrepreneur & Informaticien, spécialisé en systèmes d'information</p>
+      <button onclick="scrollToSection('#about')">Découvrez mon parcours</button>
+    </div>
+  </section>
+
+  <!-- Section À propos -->
+  <section id="about" class="about-section">
+    <h2 class="section-title">À propos</h2>
+    <div class="about-content">
+        <div class="profile-upload">
+            <img id="profile-picture" src="profil.jpg" alt="Photo de profil">
+        </div>
+        <div class="about-text">
+            <p>Passionné par les nouvelles technologies et le développement informatique, je possède une solide expérience dans la création de solutions innovantes. Expert en développement web et logiciel, je maîtrise plusieurs langages de programmation et je suis toujours en quête de nouveaux défis pour améliorer mes compétences.</p>
+        </div>
+    </div>
+</section>
+
+<a href="#" class="back-to-top" title="Retour en haut">⬆</a>
+
+  <!-- Section Compétences -->
+  <section id="skills">
+    <h2 class="section-title">Compétences</h2>
+    <div class="skills-grid">
+      <div class="skill-card">Gestion des systèmes d'information</div>
+      <div class="skill-card">Développement Web (HTML5, CSS3, Bootstrap, React, Angular, Node.js)</div>
+      <div class="skill-card">Formation & Stratégie digitale</div>
+      <div class="skill-card">Base de données & Visualisation (MySQL, PostgreSQL, MongoDB) </div>
+      <div class="skill-card">Formateur en Entreprenariat</div>
+      <div class="skill-card">Formateur en Marketing Digital</div>
+      <div class="skill-card">Outils et Frameworks : Git, Docker, Kubernetes, Jenkins, Laravel, Spring Boot</div>
+      <div class="skill-card">Formateur en Gestion de Projet</div>
+      <div class="skill-card">Intelligence Artificielle</div>
+    </div>
+  </section>
+
+  
+
+  <!-- Section Formations -->
+  
+
+  
+  <!-- Section Éducation -->
+  <section id="education">
+    <h2 class="section-title">Education </h2>
+    <div class="education-grid">
+      <div class="education-card">
+        <h3>Informatique /Réseaux Informatiques</h3>
+        <p>Institut Supérieur en Informatique </p>
+      </div>
+      
+      <div class="education-card">
+        <h3>Baccalauréat </h3>
+        <p>Cours Privés Ahmadou Bamba </p>
+        </div>
+
+        <div class="education-card">
+        <h3>BFEM </h3>
+        <p>CEM Abbé David Boilat  </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Expérience -->
+  <section id="experience">
+    <h2 class="section-title">Expériences</h2>
+
+    <div class="experience-card">
+      <h3>Responsable systèmes d'informations et de Gestion</h3>
+      <p>Groupe Scolaire Sidy NDIAYE</p>
+      </div>
+
+
+        <div class="experience-card">
+        <h3>Responsable Chef de Projet </h3>
+        <p>Institut Français de Saint-Louis</p>
+        </div>
+
+        <div class="experience-card">
+        <h3>Agent de Recensement Classique </h3>
+        <p>Agence Nationale de la Démographie </p>
+        </div>
+
+        <div class="experience-card">
+        <h3>Responsable du système d'informations et de Gestion </h3>
+        <p>Entreprise de Microfinance </p>
+        </div>
+
+        <div class="experience-card">
+        <h3>Assistant Chef Logistique  </h3>
+        <p>Direction du Commerce Extérieur</p>
+        </div>
+      
+       
+      </div>
+</div> <!-- Fin de la section des cartes d'expérience -->
+</section> <!-- Fin de la section Expérience -->
+
+
+<section id="formations">
+  <h2 class="section-title">Formations</h2>
+  <div class="formation-grid">
+    <div class="formation-card">
+      <h3>Informatiques </h3>
+      <p>Institut Supérieur d'Informatique</p>
+    </div>
+    <div class="formation-card">
+      <h3>Baccalauréat </h3>
+      <p>Cours Privés Ahmadou Bamba</p>
+    </div>
+    <div class="formation-card">
+      <h3>Brevet de Fin d'Etudes Moyennes</h3>
+      <p>CEM Abbé David Boilat</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section Certifications -->
+    <section id="certifications">
+      <h2 class="section-title">Certifications</h2>
+      <div class="certification-grid">
+        <div class="certification-card">
+          <h3> KPC Consortium Programme de Préincubation </h3>
+	          <p>Leadership, Digital Manager </p>
+	            <p>Dakar (SENEGAL) </p>
+        </div>
+        <div class="certification-card">
+         <h3>Démarrer Une Entreprise </h3>
+        <p>	Digital Manager </p>
+	      <p>HP life </p>
+        </div>
+        <div class="certification-card">
+         <h3>Columbia Engineering Open Startup Training of Trainers </h3>
+	       <p> Dakar (SENEGAL) </p>
+        </div>
+        <div class="certification-card">
+          <h3> formateurs en Programmations et Compétences Numériques  </h3>
+          <p>  SAP Africa Code Week 2022  </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Projets -->
+  <section id="projects">
+    <h2 class="section-title">Projets</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Keur Tata</h3>
+        <p>Le projet Keur Tata Bio est une initiative innovante dédiée à la fourniture de repas sains, équilibrés et variés, adaptés aux besoins nutritionnels spécifiques des clients, notamment ceux ayant des restrictions alimentaires ou des préoccupations liées à leur état de santé. Ce projet vise à promouvoir une alimentation responsable et personnalisée tout en facilitant l'accès à des repas bio de qualité </p>
+        <a href="acces_projet.html" class="voir-plus-btn">Voir Plus </a>
+      </div>
+      <div class="project-card">
+        <h3>San'TECH ID </h3>
+        <p>San Tech est une carte d'identité sanitaire sécurisée avec un code QR, permettant aux urgentistes d'intervenir rapidement pour un meilleur diagnostic. Cela garantit une prise en charge efficace des victimes et réduit significativement le taux de décès dus aux erreurs médicales.</p>
+        <a href="acces_projet.html" class="voir-plus-btn">Voir Plus</a>
+      </div>
+      <div class="project-card">
+        <h3>O'Connect</h3>
+        <p>L'application propose des données météorologiques en temps réel, des alertes sur les conditions maritimes et des infos sur les zones de pêche. Elle inclut un système de géolocalisation pour que les pêcheurs partagent leur position et enregistrent leurs trajets pour un retour sécurisé. De plus, une fonction de communication permet de rester en contact avec l'équipage ou les secours en cas d'urgence. </p>
+        <a href="acces_projet.html" class="voir-plus-btn">Voir Plus</a>
+      </div>
+    </div>
+  </section>
+
+<!-- Section Langues -->
+<section id="languages">
+  <h2 class="section-title">Langues</h2> <!-- Titre de la section Langues -->
+  <div class="languages-grid">
+    <div class="language-card">
+      <h3>Français</h3> <!-- Nom de la langue -->
+      <p>Langue maternelle</p> <!-- Niveau de compétence -->
+    </div>
+    <div class="language-card">
+      <h3>Anglais</h3> <!-- Nom de la langue -->
+      <p>Courant</p> <!-- Niveau de compétence -->
+    </div>
+    <div class="language-card">
+      <h3>Espagnol</h3>
+      <p>Intermédiaire</p>
+    </div>
+  </div>
+</section>
+ 
+  <section id="loisirs">
+    <h2 class="section-title">Centre d'Interêts</h2>
+    <div class="languages-grid">
+      <div class="language-card">
+        <h3>Intelligence artificielle et apprentissage automatique</h3>
+        
+      </div>
+      <div class="language-card">
+        <h3>Contribution à des projets open source </h3>
+   
+      </div>
+      <div class="language-card">
+        <h3>Lecture sur les nouvelles tendances en informatique </h3>
+        
+      </div>
+    </div>
+  </section>
+
+
+     
+
+  <footer id="footer">
+    <div class="footer-section">
+        <h4>Contact</h4>
+        <p>Adresse: 172 Rue  30 Saint-Louis, Sénégal</p>
+        <p>Portable: +221 78 169 35 37</p>
+        <p>fixe : +221 33 961 25 33</p>
+        <p>Email: seydinailyasse5719@gmail.com</p>
+    </div>
+    <div class="footer-section">
+        <h4>Suivez-nous</h4>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/SeydinaIlyasse"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/SeydinaIlyasse"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/seydina_ilyasse/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/seydinailyasse/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/221781693537"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://github.com/ElieKurosaki/"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+    <div class="footer-section">
+      <h4>Auteur </h4>
+        <p>&copy; 2025 Elie Kurosaki </p>
+        <p>Tous droits réservés.</p>    
+        </div>
+</footer>
+
+  <script>function scrollToSection(sectionId) {
+    document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
+  }
+
+
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.transform = `translateX(${(i - index) * 100}%)`;
+      slide.style.opacity = (i === index) ? 1 : 0; // Set opacity for fade-in effect
+    });
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+    showSlide(currentSlide);
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+    showSlide(currentSlide);
+  }
+
+  function autoSlide() {
+    nextSlide();
+    setTimeout(autoSlide, 3000); // Change slide every 3 seconds
+  }
+
+  showSlide(currentSlide);
+  autoSlide(); // Start automatic slide
+
+  const experienceCards = document.querySelectorAll('.experience-card');
+  const audio = new Audio('keyboard-sound.mp3'); // Assurez-vous que le fichier audio est dans le bon emplacement
+
+  experienceCards.forEach(card => {
+    card.addEventListener('mouseover', () => {
+      audio.play();
+    });
+  });
+
+const track = document.querySelector('.carousel-track');
+let index = 0;
+
+function moveCarousel() {
+  index++;
+  if (index >= track.children.length) {
+    index = 0;
+  }
+  track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+setInterval(moveCarousel, 3000);</script>
+
+<script>
+  // Sélectionne l'élément de la flèche
+  const backToTopButton = document.querySelector('.back-to-top');
+
+  // Affiche la flèche lorsque l'utilisateur défile vers le bas
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) { // Affiche après 300px
+      backToTopButton.style.display = 'block';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
